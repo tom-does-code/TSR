@@ -10,7 +10,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 $raw = file_get_contents('php://input');
-file_put_contents('debug.txt', $raw);
 header('Content-Type: application/json');
 
 $data = json_decode($raw, true);
