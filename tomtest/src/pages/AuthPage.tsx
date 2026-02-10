@@ -22,7 +22,7 @@ export default function AuthPage() {
   const handleSignUp = async (email: string, password: string) => {
     const data = await signUpUser(email, password);
     if (data.success) {
-      navigate('/verify');
+      navigate('/verify', { state: { email }});
       setIsSignUp(false);
     } else if (data.exists) {
       alert('Email already has an account');

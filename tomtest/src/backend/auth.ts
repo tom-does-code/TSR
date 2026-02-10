@@ -18,11 +18,11 @@ export async function signUpUser(email: string, password: string) {
   return res.json();
 }
 
-export async function handleVerify(code: string) {
+export async function verifyCode(email: string, code: string) {
   const res = await fetch(`${BASE_URL}/verify.php`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ code })
+      body: JSON.stringify({ email, code })
   });
 
   return res.json();

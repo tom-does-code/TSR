@@ -23,7 +23,8 @@ $doesExist = (bool) pg_fetch_assoc($validate);
 
 if (!$doesExist) {
     if (is_string($email) && is_string($password)) {
-    pg_query_params($conn, 'INSERT INTO "logins" (email, password) VALUES ($1, $2)', [$email, $password]);
+    $random_code = random_int(100000, 999999);
+    pg_query_params($conn, 'INSERT INTO "logins" (email, password, verification_code) VALUES ($1, $2, $3)', [$email, $password, $random_code]);
     echo json_encode(["success" => true]);
     } else {
         echo json_encode(["success" => false]);
