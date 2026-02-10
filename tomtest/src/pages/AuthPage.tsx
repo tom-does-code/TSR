@@ -9,6 +9,7 @@ export default function AuthPage() {
   const [isSignUp, setIsSignUp] = useState(false);
   const navigate = useNavigate();
 
+
   const handleLogin = async (email: string, password: string) => {
     const data = await loginUser(email, password);
     if (data.success) {
@@ -21,7 +22,7 @@ export default function AuthPage() {
   const handleSignUp = async (email: string, password: string) => {
     const data = await signUpUser(email, password);
     if (data.success) {
-      alert('Account Created!');
+      navigate('/verify');
       setIsSignUp(false);
     } else if (data.exists) {
       alert('Email already has an account');
