@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { checkString } from '../utils/validation';
 
 interface LoginFormProps {
   onLogin: (email: string, password: string) => void;
@@ -9,6 +10,14 @@ export default function LoginForm({ onLogin, onSwitch }: LoginFormProps) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+
+  const checkLocalString = (email: string, password: string) => {
+    if (checkString(email, password)) {
+      onLogin(email, password);
+    } else {
+      alert('Please fill in both fields.');
+    }
+  }
 
   return (
     <div className="loginSection">
@@ -30,7 +39,7 @@ export default function LoginForm({ onLogin, onSwitch }: LoginFormProps) {
         />
         <p className="EyeToggle" onClick={() => setShowPassword(!showPassword)}>👁️</p>
       </div>
-      <button onClick={() => onLogin(email, password)} className="sendEmailBtn">Continue</button>
+      <button onClick={() => checkLocalString(email, password)} className="sendEmailBtn">Continue</button>
       <p className="signUpToggle">
         <span onClick={onSwitch}>Don't have an account? Sign Up</span>
       </p>
