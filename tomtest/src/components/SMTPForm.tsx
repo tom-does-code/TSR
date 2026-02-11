@@ -9,6 +9,8 @@ interface SMTPFormProps {
 export default function SMTPForm({ email, onResend, onVerify }: SMTPFormProps) {
     const [code, setCode] = useState('');
 
+    console.log(email);
+
     return(
         <div>
             <h1>Please enter the code sent to your email.</h1>

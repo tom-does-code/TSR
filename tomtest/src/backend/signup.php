@@ -8,6 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit();
 }
 
+require 'smtpemail.php';
+
 $conn = pg_connect("host=localhost dbname=postgres user=postgres password=1234");
 
 $raw = file_get_contents('php://input');
@@ -23,12 +25,19 @@ $doesExist = (bool) pg_fetch_assoc($validate);
 
 if (!$doesExist) {
     if (is_string($email) && is_string($password)) {
-    $random_code = random_int(100000, 999999);
-    pg_query_params($conn, 'INSERT INTO "logins" (email, password, verification_code) VALUES ($1, $2, $3)', [$email, $password, $random_code]);
-    echo json_encode(["success" => true]);
+        $random_code = random_int(100000, 999999);
+        pg_query_params($conn, 'INSERT INTO "logins" (email, password, verification_code) VALUES ($1, $2, $3)', [$email, $password, $random_code]);
+        echo json_encode(["success" => true]);
+        $emailSent = sendVerificationEmail($email, $random_code);
+
+        if ($emailSent) {
+            echo json_encode(["success" => true]);
+        }
+
     } else {
         echo json_encode(["success" => false]);
     }
-} else {
+
+    } else {
     echo json_encode(["exists" => true, "success" => false]);
 }
