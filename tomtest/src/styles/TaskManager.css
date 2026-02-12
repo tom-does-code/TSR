@@ -1,0 +1,24 @@
+.TaskManagerHolder {
+    background-color: #faf9f7;
+    border-right: 1px solid #e8e5df;
+    width: 900px;
+    height: 650px;
+}
+
+.DisplayTasks {
+    background-color: aqua;
+
+}
+.createButton {
+    background-color:#7bff60;
+    position: relative;
+
+    width: 140px;
+    left: -35%;
+    top: -600px;
+}
+
+.TaskTitle {
+    color: rgb(0, 0, 0)
+}
+

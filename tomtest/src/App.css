@@ -104,7 +104,7 @@ input[type=password]::placeholder {
   color: #aaa;
 }
 
-button {
+.button {
   padding: 12px 24px;
   width: 100%;
   height: 45px;
@@ -115,13 +115,77 @@ button {
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-button:hover {
-  background-color: #3a8eef;
-}
 
 button:active {
   transform: scale(0.98);
+}
+
+.NavbarHolder {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 180px;
+    background-color: #faf9f7;
+    border-right: 1px solid #e8e5df;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.04);
+}
+
+.ToggleNavbar {
+    width: 100%;
+    background: none;
+    border: none;
+    color: #4a4740;
+    font-size: 24px;
+    cursor: pointer;
+    text-align: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+.ToggleNavbar:hover {
+    color: #4a7fff;
+}
+
+.NavbarMain ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 12px;
+}
+
+.NavbarMain li {
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.NavbarMain li a {
+    display: block;
+    padding: 12px 16px;
+    color: #4a4740;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.2s;
+}
+
+.NavbarMain li a:hover {
+    background-color: #f0edea;
+    color: #4a7fff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f5f3f0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }

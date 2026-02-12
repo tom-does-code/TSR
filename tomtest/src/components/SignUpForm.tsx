@@ -13,7 +13,11 @@ export default function SignUpForm({ onSignUp, onSwitch }: SignUpFormProps) {
 
   const stringCheck = (email: string, password: string) => {
     if (checkString(email, password)) {
-        onSignUp(email, password);
+        if (email.includes('@')) {
+          onSignUp(email, password);
+        } else{
+          alert("Please enter a valid email.");
+        }
     } else {
         alert('Please fill in both fields.');
     }
