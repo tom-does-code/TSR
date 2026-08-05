@@ -1,53 +1,56 @@
-Aztecas Bot
+TSR
 
-A Discord bot built with Node.js and discord.js, using the slash command API.
+TypeScript - React: A personal project created to hone my skills.
 
-I built this to learn event-driven programming and working against a third-party API. The command handler loads each command as its own module at startup rather than switching on a giant list, so adding a new command means adding a file rather than editing the core.
+A full authentication system built in TypeScript: signup, login, email verification and a protected dashboard.
 
+I built this to understand what actually sits behind a login form. Most tutorial auth stops at checking a password against a database, so I wanted to go further and handle the parts that come up in real systems: validating input properly, generating verification codes, sending them over SMTP, and only granting access once an address has been confirmed.
+
+The flow
+User signs up, and input is validated before anything is persisted
+A verification code is generated and emailed over SMTP
+The user confirms their address with the code
+Login is validated against the stored account
+A verified, logged-in user reaches the dashboard
 What it does
-Slash commands registered through Discord's application command API
-Modular command loading from the commands/ directory
-
+Signup and login with server-side validation
+Input validation extracted into its own reusable module rather than repeated per route
+Email delivery over SMTP
+Verification codes to confirm ownership of an email address
+Routed pages with a dashboard behind authentication
 Stack
 	
-Runtime	Node.js
-Library	discord.js
-Config	Environment variables via .env
-Structure
-index.js             Entry point, client setup and event handling
-deploy-commands.js   Registers slash commands with Discord's API
-commands/            One module per command
-redzones/            Images to be sent
-
+Language	TypeScript
+Framework	React
+Database	PHP Backend saving to Postgres
+Email	SMTP Built in C# SMTP
 Running it
 
-Requires Node.js and a Discord application with a bot user.
-
 bash
-git clone https://github.com/tom-does-code/Aztecas-Bot.git
-cd Aztecas-Bot
+git clone https://github.com/tom-does-code/TSR.git
+cd TSR
 npm install
 
 Create a .env file in the project root:
 
-DISCORD_TOKEN=your_bot_token
-CLIENT_ID=your_application_id
-GUILD_ID=your_server_id
-
-Register the slash commands, then start the bot:
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASSWORD=
 
 bash
-node deploy-commands.js
-node index.js
+npm run dev
+Structure
+src/
+  routes/       Route definitions
+  validation/   Reusable string and input validation
+  
 What I'd change
-
-Built while I was learning Node, and there are things I'd do differently now:
-
-Secrets belong in environment variables that are never committed. An earlier version of this repository tracked its .env file, which is a mistake I would not repeat
-node_modules should never be committed; that's what package-lock.json is for
-No error handling around API failures or rate limits
-No tests around the command handlers
-Command registration and the bot client could be separated more cleanly
+Verification codes should expire after a set window and be single-use; right now there is no time limit on them
+Rate limiting on the signup and login endpoints, so the email sender can't be abused
+Password hashing should use a deliberately slow algorithm such as bcrypt or Argon2 if it doesn't already
+No test coverage, which is the first thing I would add
+Email sending should be queued rather than blocking the signup request
 Notes
 
-Personal project built to learn Node.js, asynchronous event handling and working with a third-party API.
+Personal project built to understand authentication end to end rather than treating it as a solved box.
